@@ -1,0 +1,8 @@
+name "database"
+description "A high performance full-stack Web framework."
+homepage "https://www.kerisy.com"
+copyright "Copyright (C) 2015-2021, HuntLabs"
+license "Apache-2.0"
+dependency "hunt-entity" version="~>2.7.0"
+dependency "kerisy:basic" path=".."
+targetType "library"
