@@ -1,7 +1,7 @@
 name "basic"
 description "A high performance full-stack Web framework."
 homepage "https://www.kerisy.com"
-copyright "Copyright (C) 2015-2021, HuntLabs"
+copyright "Copyright (C) 2021, Kerisy.com"
 license "Apache-2.0"
 dependency "hunt-shiro" version="~>1.2.0"
 dependency "hunt-validation" version="~>0.4.0"
