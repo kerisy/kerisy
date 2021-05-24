@@ -654,7 +654,7 @@ private string generateAcceptedMiddleware(string name, string actionName, string
 
     str = `
         try {
-            TypeInfo_Class typeInfo = MiddlewareInterface.get("%s");
+            TypeInfo_Class typeInfo = MiddlewareInterface.Get("%s");
             string fullName = typeInfo.name;
             this.AddAcceptedMiddleware(fullName, "%s", "%s", "%s");
         } catch(Exception ex) {
@@ -671,7 +671,7 @@ private string generateAddSkippedMiddleware(string name, string actionName, stri
 
     str = `
         try {
-            TypeInfo_Class typeInfo = MiddlewareInterface.get("%s");
+            TypeInfo_Class typeInfo = MiddlewareInterface.Get("%s");
             string fullName = typeInfo.name;
             this.AddSkippedMiddleware(fullName, "%s", "%s", "%s");
         } catch(Exception ex) {

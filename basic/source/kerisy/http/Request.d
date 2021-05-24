@@ -1645,6 +1645,6 @@ void request(Request request) {
     _request = request;
 }
 
-HttpSession Session() {
+HttpSession GetSession() {
     return request().Session();
 }
