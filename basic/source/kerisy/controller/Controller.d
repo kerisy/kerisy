@@ -951,22 +951,23 @@ string __createRouteMap(T, string moduleName)()
     enum len = "Controller".length;
     enum controllerName = moduleName[0..$-len];
 
-    // The format: 
-    // 1) app.controller.[{group}.]{name}controller
-    //      app.controller.admin.IndexController
-    //      app.controller.IndexController
+    // The specification for ActionID: 
+    // 1) controller.[{group}.]{name}controller
+    //      controller.admin.IndexController
+    //      controller.IndexController
     // 
-    // 2) app.component.{component-name}.controller.{group}.{name}controller
-    //      app.component.system.controller.admin.DashboardController
+    // 2) component.{component-name}.controller.{group}.{name}controller
+    //      component.system.controller.admin.DashboardController
+
     enum string[] parts = moduleName.split(".");
     // string groupName = "default";
 
-    static if(parts.length == 4) {
-        // app.controller.admin.DashboardController
-        enum GroupName = parts[2];
-    } else static if(parts.length == 6) {
-        // app.component.system.controller.admin.DashboardController
-        enum GroupName = parts[4];
+    static if(parts.length == 3) {
+        // controller.admin.DashboardController
+        enum GroupName = parts[1];
+    } else static if(parts.length == 5) {
+        // component.system.controller.admin.DashboardController
+        enum GroupName = parts[3];
     } else {
         enum GroupName = "default";
     }
