@@ -801,15 +801,15 @@ struct UniNodeImpl(This)
     /**
      * Implement index assign operator by UniNode object
      */
-    ref This OpIndexAssign(This val, string key)
+    ref This opIndexAssign(This val, string key)
     {
-        return OpIndexAssign(val, key);
+        return opIndexAssign(val, key);
     }
 
     /**
      * Implement index assign operator by UniNode object
      */
-    ref This OpIndexAssign(ref This val, string key)
+    ref This opIndexAssign(ref This val, string key)
     {
         enforceUniNode(_kind == Kind.object, "Expected " ~ This.stringof ~ " object");
         return _object[key] = val;
