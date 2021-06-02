@@ -460,7 +460,7 @@ abstract class Controller
 
     protected void Done() {
         Request req = request();
-        req.Flush(); // assure the sessiondata flushed;
+        
         Response resp = response();
         HttpSession session = req.Session(false);
         if (session !is null ) // && session.isNewSession()
@@ -469,8 +469,10 @@ abstract class Controller
                     "/", null, false, false));
 // TODO: Tasks pending completion -@zhangxueping at 2021-04-15T15:58:11+08:00
 // 
-            // session.save();
+            // session.reflash();
+            session.save();
         }
+        req.Flush(); // assure the sessiondata flushed;
 
         resp.Header("Date", date("Y-m-d H:i:s"));
         resp.Header(HttpHeader.X_POWERED_BY, KERISY_X_POWERED_BY);
