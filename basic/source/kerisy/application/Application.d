@@ -428,66 +428,85 @@ final class Application {
 
     private void InitializeLogger() {
         ApplicationConfig.LoggingConfig conf = _appConfig.logging;
-        version (HUNT_DEBUG) {
-            hunt.logging.LogLevel level = hunt.logging.LogLevel.Trace;
-            switch (toLower(conf.level)) {
-            case "critical":
-            case "error":
-                level = hunt.logging.LogLevel.Error;
-                break;
-            case "fatal":
-                level = hunt.logging.LogLevel.Fatal;
-                break;
-            case "warning":
-                level = hunt.logging.LogLevel.Warning;
-                break;
-            case "info":
-                level = hunt.logging.LogLevel.Info;
-                break;
-            case "off":
-                level = hunt.logging.LogLevel.Off;
-                break;
-            default:
-                break;
-            }
-        } else {
-            hunt.logging.LogLevel level = hunt.logging.LogLevel.LOG_DEBUG;
-            switch (toLower(conf.level)) {
-            case "critical":
-            case "error":
-                level = hunt.logging.LogLevel.LOG_ERROR;
-                break;
-            case "fatal":
-                level = hunt.logging.LogLevel.LOG_FATAL;
-                break;
-            case "warning":
-                level = hunt.logging.LogLevel.LOG_WARNING;
-                break;
-            case "info":
-                level = hunt.logging.LogLevel.LOG_INFO;
-                break;
-            case "off":
-                level = hunt.logging.LogLevel.LOG_Off;
-                break;
-            default:
-                break;
-            }
-        }
+        hunt.logging.LogLevel level = hunt.logging.LogLevel.LOG_DEBUG;
+        switch (toLower(conf.level)) {
+        case "critical":
+        case "error":
+            level = hunt.logging.LogLevel.LOG_ERROR;
+            break;
+        case "fatal":
+            level = hunt.logging.LogLevel.LOG_FATAL;
+            break;
+        case "warning":
+            level = hunt.logging.LogLevel.LOG_WARNING;
+            break;
+        case "info":
+            level = hunt.logging.LogLevel.LOG_INFO;
+            break;
+        case "off":
+            level = hunt.logging.LogLevel.LOG_Off;
+            break;
+        default:
+            break;
+        }        
+        // version (HUNT_DEBUG) {
+        //     hunt.logging.LogLevel level = hunt.logging.LogLevel.Trace;
+        //     switch (toLower(conf.level)) {
+        //     case "critical":
+        //     case "error":
+        //         level = hunt.logging.LogLevel.Error;
+        //         break;
+        //     case "fatal":
+        //         level = hunt.logging.LogLevel.Fatal;
+        //         break;
+        //     case "warning":
+        //         level = hunt.logging.LogLevel.Warning;
+        //         break;
+        //     case "info":
+        //         level = hunt.logging.LogLevel.Info;
+        //         break;
+        //     case "off":
+        //         level = hunt.logging.LogLevel.Off;
+        //         break;
+        //     default:
+        //         break;
+        //     }
+        // } else {
+        //     hunt.logging.LogLevel level = hunt.logging.LogLevel.LOG_DEBUG;
+        //     switch (toLower(conf.level)) {
+        //     case "critical":
+        //     case "error":
+        //         level = hunt.logging.LogLevel.LOG_ERROR;
+        //         break;
+        //     case "fatal":
+        //         level = hunt.logging.LogLevel.LOG_FATAL;
+        //         break;
+        //     case "warning":
+        //         level = hunt.logging.LogLevel.LOG_WARNING;
+        //         break;
+        //     case "info":
+        //         level = hunt.logging.LogLevel.LOG_INFO;
+        //         break;
+        //     case "off":
+        //         level = hunt.logging.LogLevel.LOG_Off;
+        //         break;
+        //     default:
+        //         break;
+        //     }
+        // }
 
-        version (HUNT_DEBUG) {
-        } else {
-            LogConf logconf;
-            logconf.level = level;
-            logconf.disableConsole = conf.disableConsole;
 
-            if (!conf.file.empty)
-                logconf.fileName = buildPath(conf.path, conf.file);
+        LogConf logconf;
+        logconf.level = level;
+        logconf.disableConsole = conf.disableConsole;
 
-            logconf.maxSize = conf.maxSize;
-            logconf.maxNum = conf.maxNum;
+        if (!conf.file.empty)
+            logconf.fileName = buildPath(conf.path, conf.file);
 
-            logLoadConf(logconf);
-        }
+        logconf.maxSize = conf.maxSize;
+        logconf.maxNum = conf.maxNum;
+
+        logLoadConf(logconf);
     }
 
     version (WITH_HUNT_TRACE) {

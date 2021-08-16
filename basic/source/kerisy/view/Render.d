@@ -959,7 +959,7 @@ class Render : VisitorInterface
 
     override void Visit(ExtendsNode node)
     {
-        _extends ~= node.tmplBlock;
+        _extends ~= node.tmplBlock.get();
         TryAccept(node.tmplBlock.get);
         _extends.popBack;
         _isExtended = true;
